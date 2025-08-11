@@ -8,8 +8,8 @@ import java.nio.charset.Charset;
 public class GuavaOldIO {
     public static String readOrCreate(File file) throws IOException {
         if (!file.exists()) {
-            Files.write("default content", file, Charset.forName("UTF-8"));
+            Files.asCharSink(file, Charset.forName("UTF-8")).write("default content");
         }
-        return Files.toString(file, Charset.forName("UTF-8"));
+        return Files.asCharSource(file, Charset.forName("UTF-8")).read();
     }
 }
